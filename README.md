@@ -79,8 +79,8 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 
 ## Tests
 
-**services tests**: I think it is wrong to test interaction of the application with the database by using unit tests.
-But it was the simplest solution.
+**unitTests**: I think it is wrong to test interaction of the application with the database (services) 
+by using unit tests. But it was the simplest solution.
 
 ## Notes
 

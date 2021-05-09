@@ -11,10 +11,10 @@
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}" />
 
     <label for="client_name">Client name:</label>
-    <input type="text" id="client_name" name="client_name" th:value="${client.getClient_name()}"><br><br>
+    <input type="text" id="client_name" name="client_name" required th:value="${client.getClient_name()}"><br><br>
 
     <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" th:value="${client.getPhone()}"><br><br>
+    <input type="text" id="phone" name="phone" required th:value="${client.getPhone()}"><br><br>
 
     <input type="submit" value="Submit">
 </form>

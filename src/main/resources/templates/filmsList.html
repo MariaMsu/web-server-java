@@ -20,8 +20,8 @@
         <th scope="col"> Title </th>
         <th scope="col"> Producer </th>
         <th scope="col"> Release year </th>
-        <th scope="col"> Cassette total/available </th>
-        <th scope="col"> Disc total/available </th>
+        <th scope="col"> Cassette available/total </th>
+        <th scope="col"> Disc available/total </th>
         <th scope="col"> Cassette price </th>
         <th scope="col"> Disk price </th>
     </tr>
@@ -34,8 +34,8 @@
         <td><a th:href="'/film?film_id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
         <td><span th:text="${film.getProducer()}"> </span></td>
         <td><span th:text="${film.getRelease_year()}"> </span></td>
-        <td><span th:text="${film.getCassette_total_number()} + '/' + ${film.getCassette_available_number()}"> </span></td>
-        <td><span th:text="${film.getDisc_total_number()} + '/' + ${film.getDisc_available_number()}"> </span></td>
+        <td><span th:text="${film.getCassette_available_number()} + '/' + ${film.getCassette_total_number()}"> </span></td>
+        <td><span th:text="${film.getDisc_available_number()} + '/' + ${film.getDisc_total_number()}"> </span></td>
         <td><span th:text="${film.getCassette_price()}"> </span></td>
         <td><span th:text="${film.getDisk_price()}"> </span></td>
     </tr>

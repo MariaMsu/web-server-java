@@ -1,4 +1,4 @@
-package services;
+package unitTests;
 
 import dataAccess.client.Client;
 import dataAccess.client.ClientService;
