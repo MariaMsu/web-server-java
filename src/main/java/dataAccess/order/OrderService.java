@@ -64,19 +64,18 @@ public class OrderService {
         // increase number of available mediums
         Film film = order.getFilm();
         switch (order.getMedium()) {
-            case "disc":
-                int disk_number = film.getDisc_available_number();
-                film.setDisc_available_number(disk_number + 1);
+            case "cassette":
+                film.setCassette_available_number(film.getCassette_available_number() + 1);
                 break;
 
-            case "cassette":
-                int cassette_number = film.getCassette_available_number();
-                film.setCassette_available_number(cassette_number + 1);
+            case "disc":
+                film.setDisc_available_number(film.getDisc_available_number() + 1);
                 break;
 
             default: return null;
         }
 
+        if (!this.filmDAO.update(film)) { return null; }
         return order;
     }
 
