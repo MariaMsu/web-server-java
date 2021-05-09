@@ -13,17 +13,19 @@
     <button type="submit">Add an order</button>
 </form>
 
-<p th:text="'Film id: ' + ${film.getFilm_id()}"></p>
-<p th:text="'Film name: ' + ${film.getFilm_name()}"></p>
-<p th:text="'Producer: ' + ${film.getProducer()}"></p>
-<p th:text="'Release year: ' + ${film.getRelease_year()}"></p>
-<p th:text="'Cassette total number: ' + ${film.getCassette_total_number()}"></p>
-<p th:text="'Disc total number: ' + ${film.getDisc_total_number()}"></p>
-<p th:text="'Cassette available number: ' + ${film.getCassette_available_number()}"></p>
-<p th:text="'Disc available number: ' + ${film.getDisc_available_number()}"></p>
-<p th:text="'Cassette price: ' + ${film.getCassette_price()}"></p>
-<p th:text="'Disk price: ' + ${film.getDisk_price()}"></p>
-<p th:text="'Film is removed: ' + ${film.getFilm_is_removed()}"></p>
+<div id="filmInfo_text">
+    <p th:text="'Film id: ' + ${film.getFilm_id()}"></p>
+    <p th:text="'Film name: ' + ${film.getFilm_name()}"></p>
+    <p th:text="'Producer: ' + ${film.getProducer()}"></p>
+    <p th:text="'Release year: ' + ${film.getRelease_year()}"></p>
+    <p th:text="'Cassette total number: ' + ${film.getCassette_total_number()}"></p>
+    <p th:text="'Disc total number: ' + ${film.getDisc_total_number()}"></p>
+    <p th:text="'Cassette available number: ' + ${film.getCassette_available_number()}"></p>
+    <p th:text="'Disc available number: ' + ${film.getDisc_available_number()}"></p>
+    <p th:text="'Cassette price: ' + ${film.getCassette_price()}"></p>
+    <p th:text="'Disk price: ' + ${film.getDisk_price()}"></p>
+    <p th:text="'Film is removed: ' + ${film.getFilm_is_removed()}"></p>
+</div>
 
 <form method="post" action="/filmAdd">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
@@ -32,7 +34,7 @@
 <br>
 <form method="post" action="/filmDelete">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
-    <button type="submit">Delete film</button>
+    <button id="filmDelete_button" type="submit">Delete film</button>
 </form>
 <br>
 <form method="get" action="">
@@ -50,7 +52,7 @@ Orders shown with issue date from
 <b><span th:text="${issue_date_from}"></span></b> to
 <b><span th:text="${issue_date_to}"></span></b>:
 <br>
-<table>
+<table id="filmOrder_table">
     <thead>
     <tr>
         <th> Issue date</th>
