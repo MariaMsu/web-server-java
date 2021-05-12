@@ -10,7 +10,7 @@ CREATE TABLE Films (
   cassette_available_number integer DEFAULT 0,
   disc_available_number integer DEFAULT 0,
   cassette_price integer DEFAULT NULL,
-  disk_price integer DEFAULT NULL,
+  disc_price integer DEFAULT NULL,
   film_is_removed boolean DEFAULT false,
   PRIMARY KEY (film_id)
 );

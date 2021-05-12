@@ -35,7 +35,7 @@ public class IntegratedTest {
         Assert.assertTrue(infoText.contains(film.getCassette_total_number().toString()));
         Assert.assertTrue(infoText.contains(film.getDisc_total_number().toString()));
         Assert.assertTrue(infoText.contains(film.getCassette_price().toString()));
-        Assert.assertTrue(infoText.contains(film.getDisk_price().toString()));
+        Assert.assertTrue(infoText.contains(film.getDisc_price().toString()));
     }
 
     @Test()
@@ -43,7 +43,7 @@ public class IntegratedTest {
         Film newFilm = new Film("Sex and the city", "Michael Patrick King", 1998,
                 18, 18, 18, 18,
                 69, 96, false);
-        int newDiskPrice = 666;
+        int newDiscPrice = 666;
 
         driver.get(appURL);  // go to the url
         Assert.assertEquals(driver.getTitle(), "Index");
@@ -60,7 +60,7 @@ public class IntegratedTest {
         driver.findElement(By.id("cassette_total_number")).sendKeys(newFilm.getCassette_total_number().toString());
         driver.findElement(By.id("disc_total_number")).sendKeys(newFilm.getDisc_total_number().toString());
         driver.findElement(By.id("cassette_price")).sendKeys(newFilm.getCassette_price().toString());
-        driver.findElement(By.id("disk_price")).sendKeys(newFilm.getDisk_price().toString());
+        driver.findElement(By.id("disc_price")).sendKeys(newFilm.getDisc_price().toString());
         driver.findElement(By.id("submit_button")).click();
 
         // redirect to page with film info
@@ -76,8 +76,8 @@ public class IntegratedTest {
         // edit film info
         driver.findElement(By.id("edit_button")).click();
         Assert.assertEquals(driver.getTitle(), "Film add");
-        newFilm.setDisk_price(newDiskPrice);
-        driver.findElement(By.id("disk_price")).sendKeys(newFilm.getDisk_price().toString());
+        newFilm.setDisc_price(newDiscPrice);
+        driver.findElement(By.id("disc_price")).sendKeys(newFilm.getDisc_price().toString());
         driver.findElement(By.id("submit_button")).click();
         Assert.assertEquals(driver.getTitle(), "Film info");
         String filmInfoTextUpdate = driver.findElement(By.id("filmInfo_text")).getText();

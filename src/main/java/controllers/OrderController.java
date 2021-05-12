@@ -83,7 +83,7 @@ public class OrderController {
         int price;
         switch (medium) {
             case "cassette" -> price = film.getCassette_price();
-            case "disc" -> price = film.getDisk_price();
+            case "disc" -> price = film.getDisc_price();
             default -> {
                 model.addAttribute("error_msg", "Incorrect medium type=" + medium);
                 return "errorShow";

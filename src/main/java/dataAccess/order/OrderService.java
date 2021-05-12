@@ -26,9 +26,9 @@ public class OrderService {
                 break;
 
             case "disc":
-                int disk_number = film.getDisc_available_number();
-                if (disk_number >= 1) {
-                    film.setDisc_available_number(disk_number - 1);
+                int disc_number = film.getDisc_available_number();
+                if (disc_number >= 1) {
+                    film.setDisc_available_number(disc_number - 1);
                 } else return false;
                 break;
 

@@ -16,7 +16,7 @@ public class Film implements EntityWithId {
     private Integer cassette_available_number;
     private Integer disc_available_number;
     private Integer cassette_price;
-    private Integer disk_price;
+    private Integer disc_price;
     private boolean film_is_removed;
 
     public Film() {}
@@ -29,7 +29,7 @@ public class Film implements EntityWithId {
                 int cassette_available_number,
                 int disc_available_number,
                 int cassette_price,
-                int disk_price,
+                int disc_price,
                 boolean film_is_removed) {
         this.film_name = film_name;
         this.producer = producer;
@@ -39,7 +39,7 @@ public class Film implements EntityWithId {
         this.cassette_available_number = cassette_available_number;
         this.disc_available_number = disc_available_number;
         this.cassette_price = cassette_price;
-        this.disk_price = disk_price;
+        this.disc_price = disc_price;
         this.film_is_removed = film_is_removed;
     }
 
@@ -146,13 +146,13 @@ public class Film implements EntityWithId {
         this.cassette_price = cassette_price;
     }
 
-    @Column(name = "disk_price")
-    public Integer getDisk_price() {
-        return disk_price;
+    @Column(name = "disc_price")
+    public Integer getDisc_price() {
+        return disc_price;
     }
 
-    public void setDisk_price(int disk_price) {
-        this.disk_price = disk_price;
+    public void setDisc_price(int disc_price) {
+        this.disc_price = disc_price;
     }
 
     @Column(name = "film_is_removed")
@@ -178,7 +178,7 @@ public class Film implements EntityWithId {
 //                (this.cassette_available_number == other.cassette_available_number) &&
 //                (this.disc_available_number == other.disc_available_number) &&
                 (this.cassette_price.equals(other.cassette_price)) &&
-                (this.disk_price.equals(other.disk_price)) &&
+                (this.disc_price.equals(other.disc_price)) &&
                 (this.film_is_removed == other.film_is_removed);
     }
 
@@ -194,7 +194,7 @@ public class Film implements EntityWithId {
                 ", cassette_available_number=" + cassette_available_number +
                 ", disc_available_number=" + disc_available_number +
                 ", cassette_price=" + cassette_price +
-                ", disk_price=" + disk_price +
+                ", disc_price=" + disc_price +
                 ", film_is_removed=" + film_is_removed +
                 '}';
     }
@@ -208,7 +208,7 @@ public class Film implements EntityWithId {
         return ((this.cassette_total_number >= 0) &&
                 (this.disc_total_number >= 0) &&
                 (this.cassette_price >= 0) &&
-                (this.disk_price >= 0)) &&
+                (this.disc_price >= 0)) &&
 
                 (0 <= this.cassette_available_number) &&
                 (this.cassette_available_number <= this.cassette_total_number)&&

@@ -64,7 +64,7 @@ public class FilmController {
                                @RequestParam(name = "cassette_total_number") int cassette_total_number,
                                @RequestParam(name = "disc_total_number") int disc_total_number,
                                @RequestParam(name = "cassette_price") int cassette_price,
-                               @RequestParam(name = "disk_price") int disk_price,
+                               @RequestParam(name = "disc_price") int disc_price,
                                Model model) {
         Film film = null;
         boolean changeIsSuccessful = false;
@@ -86,7 +86,7 @@ public class FilmController {
                     return "errorShow";
                 }
                 film.setCassette_price(cassette_price);
-                film.setDisk_price(disk_price);
+                film.setDisc_price(disc_price);
                 changeIsSuccessful = filmService.updateFilm(film);
             }
         }
@@ -95,7 +95,7 @@ public class FilmController {
                     cassette_total_number, disc_total_number,
                     cassette_total_number,  // is cassette_available_number,
                     disc_total_number,  // is  disc_available_number,
-                    cassette_price, disk_price, false);
+                    cassette_price, disc_price, false);
             changeIsSuccessful = filmService.addFilm(film);
         }
 

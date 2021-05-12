@@ -8,7 +8,7 @@ INSERT INTO Films (film_name, producer, release_year) VALUES
 ('Гарри Поттер и Дары Смерти. Часть 1', 'Дэвид Хейман', 2010),
 ('Гарри Поттер и Дары Смерти. Часть 2', 'Дэвид Хейман', 2011);
 
-UPDATE Films SET cassette_price=101, disk_price=152, cassette_total_number=5, disc_total_number=10;
+UPDATE Films SET cassette_price=101, disc_price=152, cassette_total_number=5, disc_total_number=10;
 
 
 INSERT INTO Clients (client_name, phone) VALUES
