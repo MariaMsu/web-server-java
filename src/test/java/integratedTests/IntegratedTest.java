@@ -37,11 +37,11 @@ public class IntegratedTest {
         TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("filmsList_link")).click();
-        Assert.assertEquals(driver.getTitle(), "films list");
+        Assert.assertEquals(driver.getTitle(), "Films list");
         TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("filmAdd_button")).click();
-        Assert.assertEquals(driver.getTitle(), "add film");
+        Assert.assertEquals(driver.getTitle(), "Film add");
         TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("film_name")).sendKeys(newFilm.getFilm_name());
@@ -55,7 +55,7 @@ public class IntegratedTest {
         TimeUnit.SECONDS.sleep(1);
 
         // redirect to page with film info
-        Assert.assertEquals(driver.getTitle(), "film info");
+        Assert.assertEquals(driver.getTitle(), "Film info");
         // check saved film info
         String filmInfoText = driver.findElement(By.id("filmInfo_text")).getText();
         Assert.assertTrue(filmInfoText.contains(newFilm.getFilm_name()));
@@ -70,7 +70,7 @@ public class IntegratedTest {
         Assert.assertTrue(tableText.contains("No orders here"));
 
         driver.findElement(By.id("filmDelete_button")).click();
-        Assert.assertEquals(driver.getTitle(), "films list");
+        Assert.assertEquals(driver.getTitle(), "Films list");
     }
 
     @AfterClass

@@ -34,16 +34,18 @@ $ docker kill web_server-java
 
 1. Initialize postgres database (as in first step "How to run"). It requires for tests.
 
-2. *(Optional)* Install `chromium-driver` for integrated tests
-   
-```shell
-$ sudo apt-get install chromium-driver
-```
-3. Build jar (this step also could be done using intellij IDEA)
+2. Build jar (this step also could be done using intellij IDEA)
 
 ```shell
 web-server-java$ mvn -N io.takari:maven:wrapper  # setup maven wrapper
 web-server-java$ mvn -Dtest=ServicesTest package  # build executable jar; [-Dtest=ServicesTest] to run only unit tests
+```
+
+2. *(Optional)* Install `chromium-driver` and run integrated tests
+
+```shell
+$ sudo apt-get install chromium-driver
+$ mvn -Dtest=IntegratedTest test
 ```
 
 4. *(Optional)* Run jar on specified address and port
