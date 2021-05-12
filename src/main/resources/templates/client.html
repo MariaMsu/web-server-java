@@ -39,10 +39,12 @@
     <button type="submit" class="btn btn-primary">Order for this client</button>
 </form>
 
-<p th:text="'Client id: ' + ${client.getClient_id()}"></p>
-<p th:text="'Client name: ' + ${client.getClient_name()}"></p>
-<p th:text="'Phone: ' + ${client.getPhone()}"></p>
-<p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
+<div id="clientInfo_text">
+    <p th:text="'Client id: ' + ${client.getClient_id()}"></p>
+    <p th:text="'Client name: ' + ${client.getClient_name()}"></p>
+    <p th:text="'Phone: ' + ${client.getPhone()}"></p>
+    <p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
+</div>
 
 <form method="post" action="/clientAdd">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
@@ -51,7 +53,7 @@
 <br>
 <form method="post" action="/clientDelete">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit" class="btn btn-primary">Delete client</button>
+    <button id="delete_button"  type="submit" class="btn btn-primary">Delete client</button>
 </form>
 <br>
 <form method="get" action="">
@@ -69,7 +71,7 @@ Orders shown with issue date from
 <b><span th:text="${issue_date_from}"></span></b> to
 <b><span th:text="${issue_date_to}"></span></b>:
 <br>
-<table>
+<table id="clientOrder_table">
     <thead>
     <tr>
         <th> Issue date</th>

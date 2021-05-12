@@ -1,5 +1,6 @@
 package integratedTests;
 
+import dataAccess.client.Client;
 import dataAccess.film.Film;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -35,15 +36,12 @@ public class IntegratedTest {
 
         driver.get(appURL);
         Assert.assertEquals(driver.getTitle(), "Index");
-        TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("filmsList_link")).click();
         Assert.assertEquals(driver.getTitle(), "Films list");
-        TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("filmAdd_button")).click();
         Assert.assertEquals(driver.getTitle(), "Film add");
-        TimeUnit.SECONDS.sleep(1);
 
         driver.findElement(By.id("film_name")).sendKeys(newFilm.getFilm_name());
         driver.findElement(By.id("producer")).sendKeys(newFilm.getProducer());
@@ -53,7 +51,6 @@ public class IntegratedTest {
         driver.findElement(By.id("cassette_price")).sendKeys(newFilm.getCassette_price().toString());
         driver.findElement(By.id("disk_price")).sendKeys(newFilm.getDisk_price().toString());
         driver.findElement(By.id("submit_button")).click();
-        TimeUnit.SECONDS.sleep(1);
 
         // redirect to page with film info
         Assert.assertEquals(driver.getTitle(), "Film info");
@@ -70,8 +67,39 @@ public class IntegratedTest {
         String tableText = driver.findElement(By.id("filmOrder_table")).getText();
         Assert.assertTrue(tableText.contains("No orders here"));
 
-        driver.findElement(By.id("filmDelete_button")).click();
+        driver.findElement(By.id("delete_button")).click();
         Assert.assertEquals(driver.getTitle(), "Films list");
+    }
+
+    @Test()
+    public void clientAddTest() throws InterruptedException {
+        Client newClient = new Client("Sexy Tanya", "+7 (351) 267-50-52", false);
+
+        driver.get(appURL);
+        Assert.assertEquals(driver.getTitle(), "Index");
+
+        driver.findElement(By.id("clientsList_link")).click();
+        Assert.assertEquals(driver.getTitle(), "Clients list");
+
+        driver.findElement(By.id("clientAdd_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Client add");
+
+        driver.findElement(By.id("client_name")).sendKeys(newClient.getClient_name());
+        driver.findElement(By.id("phone")).sendKeys(newClient.getPhone());
+        driver.findElement(By.id("submit_button")).click();
+
+        // redirect to page with client info
+        Assert.assertEquals(driver.getTitle(), "Client info");
+        // check saved client info
+        String filmInfoText = driver.findElement(By.id("clientInfo_text")).getText();
+        Assert.assertTrue(filmInfoText.contains(newClient.getClient_name()));
+        Assert.assertTrue(filmInfoText.contains(newClient.getPhone()));
+        // there are no orders of the added film
+        String tableText = driver.findElement(By.id("clientOrder_table")).getText();
+        Assert.assertTrue(tableText.contains("No orders here"));
+
+        driver.findElement(By.id("delete_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Clients list");
     }
 
     @AfterClass
