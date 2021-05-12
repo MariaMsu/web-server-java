@@ -36,7 +36,7 @@
 
 <form method="get" action="/orderAdd">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit">Add an order</button>
+    <button type="submit" class="btn btn-primary">Order for this client</button>
 </form>
 
 <p th:text="'Client id: ' + ${client.getClient_id()}"></p>
@@ -46,12 +46,12 @@
 
 <form method="post" action="/clientAdd">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit">Edit client info</button>
+    <button type="submit" class="btn btn-primary">Edit client info</button>
 </form>
 <br>
 <form method="post" action="/clientDelete">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit">Delete client</button>
+    <button type="submit" class="btn btn-primary">Delete client</button>
 </form>
 <br>
 <form method="get" action="">
@@ -63,7 +63,7 @@
     <label for="issue_date_to">Issue date to:</label>
     <input type="date" id="issue_date_to" name="issue_date_to"><br><br>
 
-    <button type="submit">Search orders</button>
+    <button type="submit" class="btn btn-primary">Search orders</button>
 </form>
 Orders shown with issue date from
 <b><span th:text="${issue_date_from}"></span></b> to

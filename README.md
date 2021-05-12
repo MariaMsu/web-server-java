@@ -1,6 +1,7 @@
-# web-server-java (Видеопрокат)
+# web-server-java
 
-поднятый сервер: клац http://35.228.171.162/
+поднятый сервер: клац http://35.228.171.162/  
+**Если кто-то хочет накатить на эти web-странички больше css'а и вообще сделать покрасивше - вы и ваши пуллреквесты вэлком**
 
 [отчёт по первому этапу](./отчёт.md)
 
@@ -41,7 +42,8 @@ web-server-java$ mvn -N io.takari:maven:wrapper  # setup maven wrapper
 web-server-java$ mvn -Dtest=ServicesTest package  # build executable jar; [-Dtest=ServicesTest] to run only unit tests
 ```
 
-2. *(Optional)* Install `chromium-driver` and run integrated tests
+2. *(Optional)* Install `chromium-driver` and run integrated tests. 
+   The **application should be started** and listen on `localhost:8080`.
 
 ```shell
 $ sudo apt-get install chromium-driver

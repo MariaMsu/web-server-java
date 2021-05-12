@@ -36,7 +36,7 @@
 
 <form method="get" action="/orderAdd">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
-    <button type="submit">Add an order</button>
+    <button type="submit" class="btn btn-primary">Order this film</button>
 </form>
 
 <div id="filmInfo_text">
@@ -55,12 +55,12 @@
 
 <form method="post" action="/filmAdd">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
-    <button type="submit">Edit film info</button>
+    <button type="submit" class="btn btn-primary">Edit film info</button>
 </form>
 <br>
 <form method="post" action="/filmDelete">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
-    <button id="filmDelete_button" type="submit">Delete film</button>
+    <button id="filmDelete_button" type="submit" class="btn btn-primary">Delete film</button>
 </form>
 <br>
 <form method="get" action="">
@@ -72,7 +72,7 @@
     <label for="issue_date_to">Issue date to:</label>
     <input type="date" id="issue_date_to" name="issue_date_to"><br><br>
 
-    <button type="submit">Search orders</button>
+    <button type="submit" class="btn btn-primary">Search orders</button>
 </form>
 Orders shown with issue date from
 <b><span th:text="${issue_date_from}"></span></b> to

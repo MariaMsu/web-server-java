@@ -14,12 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 public class IntegratedTest {
     // todo move path & url to config; automatically run the application before the test staring
-    private final String chromeDriverPath = "/usr/bin/chromedriver";  // "/usr/bin/google-chrome";
     protected final String appURL = "http://localhost:8080/";
     protected WebDriver driver;
 
     @BeforeClass
     public void setUp() {
+        final String chromeDriverPath = "/usr/bin/chromedriver";  // "/usr/bin/google-chrome";
+
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1200, 767));
