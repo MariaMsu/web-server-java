@@ -42,18 +42,18 @@ web-server-java$ mvn -N io.takari:maven:wrapper  # setup maven wrapper
 web-server-java$ mvn -Dtest=ServicesTest package  # build executable jar; [-Dtest=ServicesTest] to run only unit tests
 ```
 
-2. *(Optional)* Install `chromium-driver` and run integrated tests. 
+3. *(Optional)* Run jar on specified address and port
+
+```shell
+web-server-java$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
+```
+
+4. *(Optional)* Install `chromium-driver` and run integrated tests.
    The **application should be started** and listen on `localhost:8080`.
 
 ```shell
 $ sudo apt-get install chromium-driver
 $ mvn -Dtest=IntegratedTest test
-```
-
-4. *(Optional)* Run jar on specified address and port
-
-```shell
-web-server-java$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
 ```
 
 5. Build & push docker image

@@ -28,16 +28,27 @@ public class IntegratedTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    void assertFilmIsEqualToWebInfo(Film film, String infoText){
+        Assert.assertTrue(infoText.contains(film.getFilm_name()));
+        Assert.assertTrue(infoText.contains(film.getProducer()));
+        Assert.assertTrue(infoText.contains(film.getRelease_year().toString()));
+        Assert.assertTrue(infoText.contains(film.getCassette_total_number().toString()));
+        Assert.assertTrue(infoText.contains(film.getDisc_total_number().toString()));
+        Assert.assertTrue(infoText.contains(film.getCassette_price().toString()));
+        Assert.assertTrue(infoText.contains(film.getDisk_price().toString()));
+    }
+
     @Test()
-    public void filmAddTest() throws InterruptedException {
+    public void filmAddAndEditTest() {
         Film newFilm = new Film("Sex and the city", "Michael Patrick King", 1998,
                 18, 18, 18, 18,
                 69, 96, false);
+        int newDiskPrice = 666;
 
-        driver.get(appURL);
+        driver.get(appURL);  // go to the url
         Assert.assertEquals(driver.getTitle(), "Index");
 
-        driver.findElement(By.id("filmsList_link")).click();
+        driver.findElement(By.id("filmsList_link")).click();  // go to page "Films list"
         Assert.assertEquals(driver.getTitle(), "Films list");
 
         driver.findElement(By.id("filmAdd_button")).click();
@@ -56,24 +67,35 @@ public class IntegratedTest {
         Assert.assertEquals(driver.getTitle(), "Film info");
         // check saved film info
         String filmInfoText = driver.findElement(By.id("filmInfo_text")).getText();
-        Assert.assertTrue(filmInfoText.contains(newFilm.getFilm_name()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getProducer()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getRelease_year().toString()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getCassette_total_number().toString()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getDisc_total_number().toString()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getCassette_price().toString()));
-        Assert.assertTrue(filmInfoText.contains(newFilm.getDisk_price().toString()));
+        assertFilmIsEqualToWebInfo(newFilm, filmInfoText);
+
         // there are no orders of the added film
         String tableText = driver.findElement(By.id("filmOrder_table")).getText();
         Assert.assertTrue(tableText.contains("No orders here"));
+
+        // edit film info
+        driver.findElement(By.id("edit_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Film add");
+        newFilm.setDisk_price(newDiskPrice);
+        driver.findElement(By.id("disk_price")).sendKeys(newFilm.getDisk_price().toString());
+        driver.findElement(By.id("submit_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Film info");
+        String filmInfoTextUpdate = driver.findElement(By.id("filmInfo_text")).getText();
+        assertFilmIsEqualToWebInfo(newFilm, filmInfoTextUpdate);
 
         driver.findElement(By.id("delete_button")).click();
         Assert.assertEquals(driver.getTitle(), "Films list");
     }
 
+    void assertClientIsEqualToWebInfo(Client client, String infoText){
+        Assert.assertTrue(infoText.contains(client.getClient_name()));
+        Assert.assertTrue(infoText.contains(client.getPhone()));
+    }
+
     @Test()
-    public void clientAddTest() throws InterruptedException {
+    public void clientAddAndEditTest() {
         Client newClient = new Client("Sexy Tanya", "+7 (351) 267-50-52", false);
+        String newPhone = "8 (495) 777-51-90";
 
         driver.get(appURL);
         Assert.assertEquals(driver.getTitle(), "Index");
@@ -91,12 +113,22 @@ public class IntegratedTest {
         // redirect to page with client info
         Assert.assertEquals(driver.getTitle(), "Client info");
         // check saved client info
-        String filmInfoText = driver.findElement(By.id("clientInfo_text")).getText();
-        Assert.assertTrue(filmInfoText.contains(newClient.getClient_name()));
-        Assert.assertTrue(filmInfoText.contains(newClient.getPhone()));
+        String clientInfoText = driver.findElement(By.id("clientInfo_text")).getText();
+        assertClientIsEqualToWebInfo(newClient, clientInfoText);
+
         // there are no orders of the added film
         String tableText = driver.findElement(By.id("clientOrder_table")).getText();
         Assert.assertTrue(tableText.contains("No orders here"));
+
+        // edit film info
+        driver.findElement(By.id("edit_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Client add");
+        newClient.setPhone(newPhone);
+        driver.findElement(By.id("phone")).sendKeys(newClient.getPhone());
+        driver.findElement(By.id("submit_button")).click();
+        Assert.assertEquals(driver.getTitle(), "Client info");
+        String filmInfoTextUpdate = driver.findElement(By.id("clientInfo_text")).getText();
+        assertClientIsEqualToWebInfo(newClient, filmInfoTextUpdate);
 
         driver.findElement(By.id("delete_button")).click();
         Assert.assertEquals(driver.getTitle(), "Clients list");
@@ -106,5 +138,4 @@ public class IntegratedTest {
     public void clear() {
         driver.quit();
     }
-
 }

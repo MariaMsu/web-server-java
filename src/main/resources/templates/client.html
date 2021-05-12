@@ -48,7 +48,7 @@
 
 <form method="post" action="/clientAdd">
     <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit" class="btn btn-primary">Edit client info</button>
+    <button id="edit_button" type="submit" class="btn btn-primary">Edit client info</button>
 </form>
 <br>
 <form method="post" action="/clientDelete">

@@ -49,13 +49,13 @@
     <p th:text="'Cassette available number: ' + ${film.getCassette_available_number()}"></p>
     <p th:text="'Disc available number: ' + ${film.getDisc_available_number()}"></p>
     <p th:text="'Cassette price: ' + ${film.getCassette_price()}"></p>
-    <p th:text="'Disk price: ' + ${film.getDisk_price()}"></p>
+    <p th:text="'Disc price: ' + ${film.getDisk_price()}"></p>
     <p th:text="'Film is removed: ' + ${film.getFilm_is_removed()}"></p>
 </div>
 
 <form method="post" action="/filmAdd">
     <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
-    <button type="submit" class="btn btn-primary">Edit film info</button>
+    <button id="edit_button" type="submit" class="btn btn-primary">Edit film info</button>
 </form>
 <br>
 <form method="post" action="/filmDelete">
