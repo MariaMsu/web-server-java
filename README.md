@@ -28,7 +28,7 @@ To work with the application open the appropriate URL in a browser.
 3. Kill the application
 
 ```shell
-$ docker kill web_server-java
+$ docker kill web_server
 ```
 
 ## How to build
@@ -73,12 +73,15 @@ class for every table.
   a setter fore all columns. It is needed for storage objects of a table.
 * **DAOInterface** - interface, that describes calling needed for the application. For example, such interfaces help to
   relatively painlessly change database (Postgre to lightSQL or something another, may be noSQL)
-* **DAOImplementation** - class, that implements communication with the database.
+* **DAOImplementation** - class, that implements communication with the database. 
+  In this application DAOImplementation classes inherits GenericDAO_CRUD. 
+  `GenericDAO_CRUD` ia a generic that implements basic methods for 
+  Creating, Reading, Updating, Deleting objects in database.
 * **Service** - class, that implements business logic and call DAO methods.
 
 
 * **Controller** - class, that implements web user interface logic.
-* **Web pages** are designed with the use of [bootstrap](https://getbootstrap.com/).
+* **Web pages** are designed using [bootstrap](https://getbootstrap.com/).
 
 There is `GenericDAO_CRUD class` that has templates for main create, read, update, delete methods of DAO classes.
 
@@ -87,7 +90,7 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 * **Service's methods** return `false` if something went wrong. It would be better to raise an exception with the error
   explanation (see "FailFast").
   
-* I don't understand the philosophy of **[hibernate](https://hibernate.org/)**. 
+* I didn't understand the philosophy of **[hibernate](https://hibernate.org/)**. 
   It has a strange interface with a somewhat unexpected behaviour. 
   For example: 
   The method `session.delete(entity)` delete the entity according only to entity's id,
