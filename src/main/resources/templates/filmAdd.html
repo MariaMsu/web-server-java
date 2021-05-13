@@ -4,7 +4,14 @@
     <title>Film add</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <!--page header-->
@@ -28,37 +35,43 @@
                 <a class="nav-link" id="orderAdd_link" href="/orderAdd">Add an order</a>
             </li>
         </ul>
-        <a class="btn btn-info" role="button" href="https://fbk.info/donate" >Donate</a>
+        <a class="btn btn-info" role="button" href="https://fbk.info/donate">Donate</a>
     </div>
 </nav>
 <!--end of page header-->
 
-<form action="/filmSave" method="post">
-    <input type="hidden" name="film_id" th:value="${film.getFilm_id()}" />
+<div class="indent">
+    <form action="/filmSave" method="post">
+        <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
 
-    <label for="film_name">Film name:</label>
-    <input type="text" id="film_name" name="film_name" required th:value="${film.getFilm_name()}"><br><br>
+        <label for="film_name">Film name:</label>
+        <input type="text" id="film_name" name="film_name" required th:value="${film.getFilm_name()}"><br><br>
 
-    <label for="producer">Producer:</label>
-    <input type="text" id="producer" name="producer" required th:value="${film.getProducer()}"><br><br>
+        <label for="producer">Producer:</label>
+        <input type="text" id="producer" name="producer" required th:value="${film.getProducer()}"><br><br>
 
-    <label for="release_year">Release year:</label>
-    <input type="number" id="release_year" name="release_year" required th:value="${film.getRelease_year()}"><br><br>
+        <label for="release_year">Release year:</label>
+        <input type="number" id="release_year" name="release_year" required
+               th:value="${film.getRelease_year()}"><br><br>
 
-    <label for="cassette_total_number">Cassette total number:</label>
-    <input type="number" id="cassette_total_number" name="cassette_total_number" required th:value="${film.getCassette_total_number()}"><br><br>
+        <label for="cassette_total_number">Cassette total number:</label>
+        <input type="number" id="cassette_total_number" name="cassette_total_number" required
+               th:value="${film.getCassette_total_number()}"><br><br>
 
-    <label for="disc_total_number">Disc total number</label>
-    <input type="number" id="disc_total_number" name="disc_total_number" required th:value="${film.getDisc_total_number()}"><br><br>
+        <label for="disc_total_number">Disc total number</label>
+        <input type="number" id="disc_total_number" name="disc_total_number" required
+               th:value="${film.getDisc_total_number()}"><br><br>
 
-    <label for="cassette_price">Cassette price:</label>
-    <input type="number" id="cassette_price" name="cassette_price" required th:value="${film.getCassette_price()}"><br><br>
+        <label for="cassette_price">Cassette price:</label>
+        <input type="number" id="cassette_price" name="cassette_price" required
+               th:value="${film.getCassette_price()}"><br><br>
 
-    <label for="disc_price">Disc price:</label>
-    <input type="number" id="disc_price" name="disc_price" required th:value="${film.getDisc_price()}"><br><br>
+        <label for="disc_price">Disc price:</label>
+        <input type="number" id="disc_price" name="disc_price" required th:value="${film.getDisc_price()}"><br><br>
 
-    <input id="submit_button" type="submit" value="Submit" class="btn btn-primary">
-</form>
+        <input id="submit_button" type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

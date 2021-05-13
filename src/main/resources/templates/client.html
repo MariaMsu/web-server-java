@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,78 +36,94 @@
                 <a class="nav-link" id="orderAdd_link" href="/orderAdd">Add an order</a>
             </li>
         </ul>
-        <a class="btn btn-info" role="button" href="https://fbk.info/donate" >Donate</a>
+        <a class="btn btn-info" role="button" href="https://fbk.info/donate">Donate</a>
     </div>
 </nav>
 <!--end of page header-->
 
-<form method="get" action="/orderAdd">
-    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button type="submit" class="btn btn-primary">Order for this client</button>
-</form>
+<div class="indent">
+    <div id="clientInfo_text">
+        <p th:text="'Client id: ' + ${client.getClient_id()}"></p>
+        <p th:text="'Client name: ' + ${client.getClient_name()}"></p>
+        <p th:text="'Phone: ' + ${client.getPhone()}"></p>
+        <p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
+    </div>
+    <br>
 
-<div id="clientInfo_text">
-    <p th:text="'Client id: ' + ${client.getClient_id()}"></p>
-    <p th:text="'Client name: ' + ${client.getClient_name()}"></p>
-    <p th:text="'Phone: ' + ${client.getPhone()}"></p>
-    <p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
+    <!--edit delete order button group-->
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <form method="post" action="/clientAdd">
+                <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+                <button id="edit_button" type="submit" class="btn btn-secondary">Edit client info</button>
+            </form>
+            <form method="post" action="/clientDelete">
+                <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+                <button id="delete_button" type="submit" class="btn btn-secondary">Delete client</button>
+            </form>
+        </div>
+        <div class="btn-group" role="group" aria-label="Second group">
+            <form method="get" action="/orderAdd">
+                <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+                <button type="submit" class="btn btn-secondary" style="background-color: darkred">Order for this
+                    client
+                </button>
+            </form>
+        </div>
+    </div>
+    <!--end of button group-->
+
+    <br>
+    <form method="get" action="">
+        <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+
+        <label for="issue_date_from">Issue date from:</label>
+        <input type="date" id="issue_date_from" name="issue_date_from"><br><br>
+
+        <label for="issue_date_to">Issue date to:</label>
+        <input type="date" id="issue_date_to" name="issue_date_to"><br><br>
+
+        <button type="submit" class="btn btn-primary">Search orders</button>
+    </form>
+    Orders shown with issue date from
+    <b><span th:text="${issue_date_from}"></span></b> to
+    <b><span th:text="${issue_date_to}"></span></b>:
+    <br>
+
+    <!--order table-->
+    <table id="clientOrder_table">
+        <thead>
+        <tr>
+            <th> Issue date</th>
+            <th> Return date</th>
+            <th> Film name</th>
+            <th> Medium</th>
+            <th> Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orders.empty}">
+            <td colspan="6"> No orders here</td>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
+
+            <td th:if="${order.getFilm_return_date() == null}">
+                <a th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}"> return now </a></td>
+            <td th:if="${order.getFilm_return_date() != null}">
+                <span th:text="${order.getFilm_return_date()}"> </span></td>
+
+            <td><a th:href="'/film?film_id=' + ${order.getFilm().getFilm_id()}">
+                <span th:text="${order.getFilm().getFilm_name()}"> </span> </a></td>
+            <td><span th:text="${order.getMedium()}"> </span></td>
+            <td><span th:text="${order.getPrice()}"> </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--end of order table-->
+
+
 </div>
-
-<form method="post" action="/clientAdd">
-    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button id="edit_button" type="submit" class="btn btn-primary">Edit client info</button>
-</form>
-<br>
-<form method="post" action="/clientDelete">
-    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-    <button id="delete_button"  type="submit" class="btn btn-primary">Delete client</button>
-</form>
-<br>
-<form method="get" action="">
-    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
-
-    <label for="issue_date_from">Issue date from:</label>
-    <input type="date" id="issue_date_from" name="issue_date_from"><br><br>
-
-    <label for="issue_date_to">Issue date to:</label>
-    <input type="date" id="issue_date_to" name="issue_date_to"><br><br>
-
-    <button type="submit" class="btn btn-primary">Search orders</button>
-</form>
-Orders shown with issue date from
-<b><span th:text="${issue_date_from}"></span></b> to
-<b><span th:text="${issue_date_to}"></span></b>:
-<br>
-<table id="clientOrder_table">
-    <thead>
-    <tr>
-        <th> Issue date</th>
-        <th> Return date</th>
-        <th> Film name</th>
-        <th> Medium</th>
-        <th> Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${orders.empty}">
-        <td colspan="6"> No orders here</td>
-    </tr>
-    <tr th:each="order : ${orders}">
-        <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
-
-        <td th:if="${order.getFilm_return_date() == null}">
-            <a th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}"> return now </a></td>
-        <td th:if="${order.getFilm_return_date() != null}">
-            <span th:text="${order.getFilm_return_date()}"> </span></td>
-
-        <td><a th:href="'/film?film_id=' + ${order.getFilm().getFilm_id()}">
-            <span th:text="${order.getFilm().getFilm_name()}"> </span> </a></td>
-        <td><span th:text="${order.getMedium()}"> </span></td>
-        <td><span th:text="${order.getPrice()}"> </span></td>
-    </tr>
-    </tbody>
-</table>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

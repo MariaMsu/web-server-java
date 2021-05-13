@@ -4,7 +4,14 @@
     <title>Client add</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <!--page header-->
@@ -28,22 +35,24 @@
                 <a class="nav-link" id="orderAdd_link" href="/orderAdd">Add an order</a>
             </li>
         </ul>
-        <a class="btn btn-info" role="button" href="https://fbk.info/donate" >Donate</a>
+        <a class="btn btn-info" role="button" href="https://fbk.info/donate">Donate</a>
     </div>
 </nav>
 <!--end of page header-->
 
-<form action="/clientSave" method="post">
-    <input type="hidden" name="client_id" th:value="${client.getClient_id()}" />
+<div class="indent">
+    <form action="/clientSave" method="post">
+        <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
 
-    <label for="client_name">Client name:</label>
-    <input type="text" id="client_name" name="client_name" required th:value="${client.getClient_name()}"><br><br>
+        <label for="client_name">Client name:</label>
+        <input type="text" id="client_name" name="client_name" required th:value="${client.getClient_name()}"><br><br>
 
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" required th:value="${client.getPhone()}"><br><br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required th:value="${client.getPhone()}"><br><br>
 
-    <input id="submit_button" type="submit" value="Submit" class="btn btn-primary">
-</form>
+        <input id="submit_button" type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

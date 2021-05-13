@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,24 +36,32 @@
                 <a class="nav-link" id="orderAdd_link" href="/orderAdd">Add an order</a>
             </li>
         </ul>
-        <a class="btn btn-info" role="button" href="https://fbk.info/donate" >Donate</a>
+        <a class="btn btn-info" role="button" href="https://fbk.info/donate">Donate</a>
     </div>
 </nav>
 <!--end of page header-->
 
-<br>
-<br>
-<h3 class="text-center"> We are the best video rental service in the world</h3>
-<br>
-<h1 class="text-center font-weight-bold display-4"> Choose a movie for yourself <br> from our huge collection</h1>
-<br>
-<br>
-
-<p>
-    Made by students, inspired by zhaba. Kva-kva.
+<div class="indent">
+    <h4 class="text-center"> We are one of the leading video rental services in the world</h4>
     <br>
-    © Все права защищены; 2021, Moscow. Site's <a href="https://github.com/MariaMsu/web-server-java"> source code </a> on Github.
-</p>
+    <h1 class="text-center font-weight-bold display-4"> Best movies for you to choose <br> from our huge collection</h1>
+    <br>
+    <br>
+
+    <a class="btn btn-warning btn-lg btn-block" role="button" href="https://fbk.info/donate"
+       data-toggle="tooltip" data-placement="top" title="Stop being neutral">
+        <span class="font-weight-bold display-4"> DONATE </span>
+    </a>
+
+    <div class="fixed-bottom">
+        <p>
+            Made by students, inspired by zhaba. Kva-kva.
+            <br>
+            © Все права защищены; 2021, Moscow. Site's <a href="https://github.com/MariaMsu/web-server-java"> source
+            code </a> on Github.
+        </p>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
