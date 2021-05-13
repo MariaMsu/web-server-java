@@ -6,26 +6,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.PrepareDatabase;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 public class IntegratedTest {
-    // todo move path & url to config; automatically run the application before the test staring
+    // todo move path & url to config; automatically run the application before the test starting
     protected final String appURL = "http://localhost:8080/";
     protected WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws SQLException, IOException {
         final String chromeDriverPath = "/usr/bin/chromedriver";  // "/usr/bin/google-chrome";
 
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1200, 767));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // Init database. Some tests require that the base is not empty
+        PrepareDatabase.initEmptyDB();
+        PrepareDatabase.fillDB();
     }
 
     void assertFilmIsEqualToWebInfo(Film film, String infoText){
@@ -39,13 +47,13 @@ public class IntegratedTest {
     }
 
     @Test()
-    public void filmAddAndEditTest() {
+    public void filmAddEditDeleteTest() {
         Film newFilm = new Film("Sex and the city", "Michael Patrick King", 1998,
                 18, 18, 18, 18,
                 69, 96, false);
         int newDiscPrice = 666;
 
-        driver.get(appURL);  // go to the url
+        driver.get(appURL);  // go to the root url
         Assert.assertEquals(driver.getTitle(), "Index");
 
         driver.findElement(By.id("filmsList_link")).click();  // go to page "Films list"
@@ -83,6 +91,7 @@ public class IntegratedTest {
         String filmInfoTextUpdate = driver.findElement(By.id("filmInfo_text")).getText();
         assertFilmIsEqualToWebInfo(newFilm, filmInfoTextUpdate);
 
+        // delete film
         driver.findElement(By.id("delete_button")).click();
         Assert.assertEquals(driver.getTitle(), "Films list");
     }
@@ -93,7 +102,7 @@ public class IntegratedTest {
     }
 
     @Test()
-    public void clientAddAndEditTest() {
+    public void clientAddEditDeleteTest() {
         Client newClient = new Client("Sexy Tanya", "+7 (351) 267-50-52", false);
         String newPhone = "8 (495) 777-51-90";
 
@@ -130,8 +139,70 @@ public class IntegratedTest {
         String filmInfoTextUpdate = driver.findElement(By.id("clientInfo_text")).getText();
         assertClientIsEqualToWebInfo(newClient, filmInfoTextUpdate);
 
+        // delete client
         driver.findElement(By.id("delete_button")).click();
         Assert.assertEquals(driver.getTitle(), "Clients list");
+    }
+
+    @Test()
+    public void orderAddReturnTest() {
+        String filmName;
+        String clientName;
+        String orderURL;
+
+        driver.get(appURL);
+        Assert.assertEquals(driver.getTitle(), "Index");
+
+        driver.findElement(By.id("orderAdd_link")).click();
+        Assert.assertEquals(driver.getTitle(), "Order add");
+
+        // select first client
+        Select clientDropdown = new Select(driver.findElement(By.id("client_select")));
+        clientName = clientDropdown.getOptions().get(0).getText();
+        clientDropdown.selectByIndex(0);
+
+        // select first film
+        Select filmDropdown = new Select(driver.findElement(By.id("film_select")));
+        String filmNameAndMediums = filmDropdown.getOptions().get(0).getText();
+        filmName = filmNameAndMediums.split(" \\(")[0];
+        filmDropdown.selectByIndex(0);
+
+        // check click ability & choose disc
+        driver.findElement(By.id("cassette_radio")).click();
+        driver.findElement(By.id("disc_radio")).click();
+
+        // set film_issue_date
+        driver.findElement(By.id("film_issue_date")).sendKeys("11-23-2020");
+
+        driver.findElement(By.id("submit_button")).click();
+
+        Assert.assertEquals(driver.getTitle(), "Order info");
+        String infoText = driver.findElement(By.id("orderInfo_text")).getText();
+        // check saved order info
+        Assert.assertTrue(infoText.contains(clientName));
+        Assert.assertTrue(infoText.contains(filmName));
+        Assert.assertTrue(infoText.contains("disc"));
+        Assert.assertTrue(infoText.contains("null"));  // chek Film return date = null
+
+        orderURL = driver.getCurrentUrl();  // save order url
+
+        // check order appeared in the film page
+        driver.findElement(By.linkText(filmName)).click();
+        String filmOrderText = driver.findElement(By.id("filmOrder_table")).getText();
+        Assert.assertTrue(filmOrderText.contains(clientName));
+
+        // check order appeared in the client page
+        driver.get(orderURL);
+        driver.findElement(By.linkText(clientName)).click();
+        String clientOrderText = driver.findElement(By.id("clientOrder_table")).getText();
+        Assert.assertTrue(clientOrderText.contains(filmName));
+
+        // return film
+        driver.findElement(By.id("returnOrder_link")).click();
+
+        Assert.assertEquals(driver.getTitle(), "Order info");
+        String infoReturnedText = driver.findElement(By.id("orderInfo_text")).getText();
+        Assert.assertFalse(infoReturnedText.contains("null"));  // chek Film return date != null
     }
 
     @AfterClass

@@ -42,15 +42,18 @@
 <!--end of page header-->
 
 <div class="indent">
-    <p th:text="'Order id: ' + ${order.getOrder_id()}"></p>
-    <p> Client name: <a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
-        <span th:text="${order.getClient().getClient_name()}"></span> </a></p>
-    <p> Film name: <a th:href="'/film?film_id=' + ${order.getFilm().getFilm_id()}">
-        <span th:text="${order.getFilm().getFilm_name()}"></span> </a></p>
-    <p th:text="'Film issue date: ' + ${order.getFilm_issue_date()}"></p>
-    <p th:text="'Film return date: ' + ${order.getFilm_return_date()}"></p>
-    <p th:text="'Mediun: ' + ${order.getMedium()}"></p>
-    <p th:text="'Price: ' + ${order.getPrice()}"></p>
+    <div id="orderInfo_text">
+        <p th:text="'Order id: ' + ${order.getOrder_id()}"></p>
+        <p> Client name: <a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
+            <span th:text="${order.getClient().getClient_name()}"></span> </a></p>
+        <p> Film name: <a th:href="'/film?film_id=' + ${order.getFilm().getFilm_id()}">
+            <span th:text="${order.getFilm().getFilm_name()}"></span> </a></p>
+        <p th:text="'Film issue date: ' + ${order.getFilm_issue_date()}"></p>
+        <p th:text="'Film return date: ' + ${order.getFilm_return_date()}"></p>
+        <p th:text="'Mediun: ' + ${order.getMedium()}"></p>
+        <p th:text="'Price: ' + ${order.getPrice()}"></p>
+    </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

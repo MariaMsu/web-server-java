@@ -43,8 +43,8 @@
 
 <div class="indent">
     <form action="/orderSave" method="post">
-        <label for="film_id">Choose a film (Cassette/Disc available):</label><br>
-        <select id="film_id" name="film_id" size="6" required>
+        <label for="film_select">Choose a film (Cassette/Disc available):</label><br>
+        <select id="film_select" name="film_select" size="6" required>
             <option th:each="film : ${films}"
                     th:value="${film.getFilm_id()}"
                     th:text="${film.getFilm_name()} +
@@ -53,8 +53,8 @@
             </option>
         </select>
         <br><br>
-        <label for="client_id">Choose a client:</label><br>
-        <select id="client_id" name="client_id" size="6" required>
+        <label for="client_select">Choose a client:</label><br>
+        <select id="client_select" name="client_select" size="6" required>
             <option th:each="client : ${clients}"
                     th:value="${client.getClient_id()}"
                     th:text="${client.getClient_name()}"
@@ -62,16 +62,18 @@
             </option>
         </select>
         <br><br>
+
         Choose medium type:
-        <input type="radio" id="cassette" name="medium" value="cassette" required>
-        <label for="cassette">cassette</label>
-        <input type="radio" id="disc" name="medium" value="disc">
-        <label for="disc">disc</label>
+        <input type="radio" id="cassette_radio" name="medium" value="cassette" required>
+        <label for="cassette_radio">cassette</label>
+        <input type="radio" id="disc_radio" name="medium" value="disc">
+        <label for="disc_radio">disc</label>
+
         <br><br>
         <label for="film_issue_date">Film issue date:</label>
-        <input type="date" id="film_issue_date" name="film_issue_date" th:value="${today_date}" required><br><br>
+        <input type="date" id="film_issue_date" name="film_issue_date" th:value="${today_date}" required><br>
         <br>
-        <input type="submit" value="Make order" class="btn btn-primary">
+        <input id="submit_button" type="submit" value="Make order" class="btn btn-primary">
     </form>
 </div>
 

@@ -48,7 +48,6 @@
         <p th:text="'Phone: ' + ${client.getPhone()}"></p>
         <p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
     </div>
-    <br>
 
     <!--edit delete order button group-->
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -109,7 +108,8 @@
             <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
 
             <td th:if="${order.getFilm_return_date() == null}">
-                <a th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}"> return now </a></td>
+                <a id="returnOrder_link" th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}">
+                    return now </a></td>
             <td th:if="${order.getFilm_return_date() != null}">
                 <span th:text="${order.getFilm_return_date()}"> </span></td>
 

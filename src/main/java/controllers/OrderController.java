@@ -57,8 +57,8 @@ public class OrderController {
     }
 
     @PostMapping("/orderSave")
-    public String orderSavePage(@RequestParam(name = "film_id", required = false) Integer film_id,
-                                @RequestParam(name = "client_id", required = false) Integer client_id,
+    public String orderSavePage(@RequestParam(name = "film_select", required = false) Integer film_id,
+                                @RequestParam(name = "client_select", required = false) Integer client_id,
                                 @RequestParam(name = "medium", required = false) String medium,
                                 @RequestParam(name = "film_issue_date", required = false) Date film_issue_date,
                                 Model model) {
