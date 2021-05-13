@@ -125,11 +125,11 @@ public class IntegratedTest {
         String clientInfoText = driver.findElement(By.id("clientInfo_text")).getText();
         assertClientIsEqualToWebInfo(newClient, clientInfoText);
 
-        // there are no orders of the added film
+        // there are no orders of the added client
         String tableText = driver.findElement(By.id("clientOrder_table")).getText();
         Assert.assertTrue(tableText.contains("No orders here"));
 
-        // edit film info
+        // edit client info
         driver.findElement(By.id("edit_button")).click();
         Assert.assertEquals(driver.getTitle(), "Client add");
         newClient.setPhone(newPhone);

@@ -59,7 +59,7 @@ $ mvn -Dtest=IntegratedTest test
 5. Build & push docker image
 
 ```shell
-$ export WEB_V="v0.6"
+$ export WEB_V="v1.1"
 $ docker build --build-arg JAR_FILE=target/web-server-java-1.0.jar -t mariamsu/web-server-java:latest -t mariamsu/web-server-java:${WEB_V} .
 $ docker push mariamsu/web-server-java:latest ; docker push mariamsu/web-server-java:${WEB_V}
 ```
@@ -78,18 +78,26 @@ class for every table.
 
 
 * **Controller** - class, that implements web user interface logic.
+* **Web pages** are designed with the use of [bootstrap](https://getbootstrap.com/).
 
 There is `GenericDAO_CRUD class` that has templates for main create, read, update, delete methods of DAO classes.
-
-## Tests
-
-**unitTests**: I think it is wrong to test interaction of the application with the database (services) 
-by using unit tests. But it was the simplest solution.
 
 ## Notes
 
 * **Service's methods** return `false` if something went wrong. It would be better to raise an exception with the error
   explanation (see "FailFast").
+  
+* I don't understand the philosophy of **[hibernate](https://hibernate.org/)**. 
+  It has a strange interface with a somewhat unexpected behaviour. 
+  For example: 
+  The method `session.delete(entity)` delete the entity according only to entity's id,
+  no meter which values another fields have. 
+  The method `session.save(entity)` implicitly change `id` field of the saved object.
+  In my opinion hibernate severely limits flexibility of SQL, but gives little in return.
+  The only advantage of hibernate that I have found is that 
+  entities associated with the object by a foreign keys are automatically loaded 
+  into the corresponding fields of the object.
+  (For example in this application object `Order` automatically has corresponding `Film` and `Client` in class's fields)
 
 * There are problems with **data consistency**. The information about `cassette_available_number`
   and `disc_available_number`
@@ -101,3 +109,6 @@ by using unit tests. But it was the simplest solution.
 
 * [Video](https://www.youtube.com/watch?v=H68EaWZvQtE) about an architecture of modern java web servers. 
   The main idea is that JSP (JavaServer Pages) is an outdated technology.
+  
+* I think it is wrong to **test** interaction of the application with the database (**services**)
+  by using unit tests. But it was the simplest solution.
