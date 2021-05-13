@@ -59,9 +59,9 @@ public class IntegratedTest {
         driver.findElement(By.id("filmsList_link")).click();  // go to page "Films list"
         Assert.assertEquals(driver.getTitle(), "Films list");
 
+        // add new film
         driver.findElement(By.id("filmAdd_button")).click();
         Assert.assertEquals(driver.getTitle(), "Film add");
-
         driver.findElement(By.id("film_name")).sendKeys(newFilm.getFilm_name());
         driver.findElement(By.id("producer")).sendKeys(newFilm.getProducer());
         driver.findElement(By.id("release_year")).sendKeys(newFilm.getRelease_year().toString());
@@ -112,9 +112,9 @@ public class IntegratedTest {
         driver.findElement(By.id("clientsList_link")).click();
         Assert.assertEquals(driver.getTitle(), "Clients list");
 
+        // add new client
         driver.findElement(By.id("clientAdd_button")).click();
         Assert.assertEquals(driver.getTitle(), "Client add");
-
         driver.findElement(By.id("client_name")).sendKeys(newClient.getClient_name());
         driver.findElement(By.id("phone")).sendKeys(newClient.getPhone());
         driver.findElement(By.id("submit_button")).click();
