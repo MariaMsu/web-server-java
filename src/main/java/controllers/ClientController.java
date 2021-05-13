@@ -34,6 +34,10 @@ public class ClientController {
                              @RequestParam(name = "issue_date_to", required = false) String issue_date_to,
                              Model model) {
         Client client = clientService.findClientById(client_id);
+        if (client == null){
+            model.addAttribute("error_msg", "There is no client with id=" + client_id);
+            return "errorShow";
+        }
         model.addAttribute("client", client);
 
         Date startDate;

@@ -145,6 +145,17 @@ public class IntegratedTest {
     }
 
     @Test()
+    public void errorTest(){
+        // this client does not exist
+        driver.get(appURL+"/client?client_id=9999");
+        Assert.assertEquals(driver.getTitle(), "Error");
+
+        // this film does not exist
+        driver.get(appURL+"/film?film_id=9999");
+        Assert.assertEquals(driver.getTitle(), "Error");
+    }
+
+    @Test()
     public void orderAddReturnTest() {
         String filmName;
         String clientName;

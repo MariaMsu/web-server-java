@@ -32,6 +32,10 @@ public class FilmController {
                            @RequestParam(name = "issue_date_to", required = false) String issue_date_to,
                            Model model) {
         Film film = filmService.findFilmById(film_id);
+        if (film == null){
+            model.addAttribute("error_msg", "There is no film with id=" + film_id);
+            return "errorShow";
+        }
         model.addAttribute("film", film);
 
         Date startDate;
