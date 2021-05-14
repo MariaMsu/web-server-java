@@ -1,4 +1,4 @@
-package integratedTests;
+package systemTests;
 
 import dataAccess.client.Client;
 import dataAccess.film.Film;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
-public class IntegratedTest {
+public class SystemTest {
     // todo move path & url to config; automatically run the application before the test starting
     protected final String appURL = "http://localhost:8080/";
     protected WebDriver driver;
@@ -28,7 +28,7 @@ public class IntegratedTest {
 
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(1200, 767));
+        driver.manage().window().setSize(new Dimension(1000, 1000));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         // Init database. Some tests require that the base is not empty

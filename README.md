@@ -48,12 +48,12 @@ web-server-java$ mvn -Dtest=ServicesTest package  # build executable jar; [-Dtes
 web-server-java$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
 ```
 
-4. *(Optional)* Install `chromium-driver` and run integrated tests.
+4. *(Optional)* Install `chromium-driver` and run system tests.
    The **application should be started** and listen on `localhost:8080`.
 
 ```shell
 $ sudo apt-get install chromium-driver
-$ mvn -Dtest=IntegratedTest test
+$ mvn -Dtest=SystemTest test
 ```
 
 5. Build & push docker image
