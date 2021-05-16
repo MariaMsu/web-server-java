@@ -65,6 +65,8 @@ $ docker push mariamsu/web-server-java:latest ; docker push mariamsu/web-server-
 ```
 
 ## Architecture:
+The project is build using **Maven** because 
+there are more tutorials for Hibernate and Spring that use maven, then those that use **Ant**.
 
 The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service
 class for every table.
@@ -96,7 +98,7 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
   The method `session.delete(entity)` delete the entity according only to entity's id,
   no meter which values another fields have. 
   The method `session.save(entity)` implicitly change `id` field of the saved object.
-  In my opinion hibernate severely limits flexibility of SQL, but gives little in return.
+  And in my opinion hibernate severely limits flexibility of SQL, but gives little in return.
   The only advantage of hibernate that I have found is that 
   entities associated with the object by a foreign keys are automatically loaded 
   into the corresponding fields of the object.
