@@ -1,8 +1,5 @@
 # web-server-java
 
-поднятый сервер: клац http://35.228.171.162/  
-**Если кто-то хочет накатить на эти web-странички больше css'а и вообще сделать покрасивше - вы и ваши пуллреквесты вэлком**
-
 [отчёт по первому этапу](./отчёт.md)
 
 ## How to run
@@ -68,8 +65,11 @@ $ docker push mariamsu/web-server-java:latest ; docker push mariamsu/web-server-
 The project is build using **Maven** because 
 there are more tutorials for Hibernate and Spring that use maven, then those that use **Ant**.
 
-The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service
-class for every table.
+The database of this application consist of 3 tables:
+
+![Alt text](Images/db.png)
+
+There are POJO class, DAOInterface, DAOImplementation, service class for every table.
 
 * **POJO** - Plain Old Java Object - class, whose fields corresponding to columns of the table and there is a getter and
   a setter fore all columns. It is needed for storage objects of a table.
