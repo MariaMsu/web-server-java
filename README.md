@@ -62,24 +62,24 @@ $ docker push mariamsu/web-server-java:latest ; docker push mariamsu/web-server-
 ```
 
 ## Architecture:
-The project is build using **Maven** because 
+The project is built using **Maven** because 
 there are more tutorials for Hibernate and Spring that use maven, then those that use **Ant**.
 
-The database of this application consist of 3 tables:
+The database of this application consists of 3 tables:
 
 ![Alt text](Images/db.png)
 
-There are POJO class, DAOInterface, DAOImplementation, service class for every table.
+There are POJO class, DAOInterface, DAOImplementation and service class for every table.
 
 * **POJO** - Plain Old Java Object - class, whose fields corresponding to columns of the table and there is a getter and
-  a setter fore all columns. It is needed for storage objects of a table.
-* **DAOInterface** - interface, that describes calling needed for the application. For example, such interfaces help to
-  relatively painlessly change database (Postgre to lightSQL or something another, may be noSQL)
+  a setter for all columns. It is necessary for the storage objects of a table.
+* **DAOInterface** - interface, that describes the calling necessary for the application. For example, such interfaces help to
+  relatively painlessly change database (Postgre to lightSQL or something else, maybe noSQL)
 * **DAOImplementation** - class, that implements communication with the database. 
-  In this application DAOImplementation classes inherits GenericDAO_CRUD. 
+  In this application DAOImplementation classes inherit GenericDAO_CRUD. 
   `GenericDAO_CRUD` ia a generic that implements basic methods for 
-  Creating, Reading, Updating, Deleting objects in database.
-* **Service** - class, that implements business logic and call DAO methods.
+  Creating, Reading, Updating, Deleting objects in the database.
+* **Service** - class, that implements business logic and calls DAO methods.
 
 
 * **Controller** - class, that implements web user interface logic.
@@ -95,8 +95,8 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 * I didn't understand the philosophy of **[hibernate](https://hibernate.org/)**. 
   It has a strange interface with a somewhat unexpected behaviour. 
   For example: 
-  The method `session.delete(entity)` delete the entity according only to entity's id,
-  no meter which values another fields have. 
+  The method `session.delete(entity)` deletes the entity according only to entity's id,
+  no matter which values other fields have. 
   The method `session.save(entity)` implicitly change `id` field of the saved object.
   And in my opinion hibernate severely limits flexibility of SQL, but gives little in return.
   The only advantage of hibernate that I have found is that 
@@ -106,11 +106,11 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 
 * There are problems with **data consistency**. The information about `cassette_available_number`
   and `disc_available_number`
-  is saved in the columns of `films` table. But it also could be got by counting not returned orders in `ordes` table.
-  Thus we need to be carefully when changing this data. I think it would be better to remove `...available_number`
+  is saved in the columns of `films` table. But it also could be obtained by counting unreturned orders in the `ordes` table.
+  Thus we need to be careful when changing this data. I think it would be better to remove `...available_number`
   columns from database.
 
-* There is no data consistency protection when the application is calling in **parallel**.
+* There is no data consistency protection when the application is running in **parallel**.
 
 * [Video](https://www.youtube.com/watch?v=H68EaWZvQtE) about an architecture of modern java web servers. 
   The main idea is that JSP (JavaServer Pages) is an outdated technology.
